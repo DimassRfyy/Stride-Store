@@ -23,6 +23,8 @@ class CategoryResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-group';
 
+    protected static ?string $navigationGroup = 'Shoes Management';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -32,6 +34,8 @@ class CategoryResource extends Resource
                     ->maxLength(255),
                 FileUpload::make('icon')
                     ->image()
+                    ->disk('public')
+                    ->directory('categoriesIcon')
                     ->required(),
             ]);
     }

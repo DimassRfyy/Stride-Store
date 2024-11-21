@@ -62,14 +62,14 @@
             <hr class="border-[#EAEAED]">
             <div class="flex items-center gap-[10px]">
                 <img src="{{ asset('assets/images/icons/shield-tick.svg') }}" class="w-8 h-8 flex shrink-0" alt="icon">
-                <p class="leading-[26px]">Kami melindungi data privasi anda dengan baik bantuan Angga X.</p>
+                <p class="leading-[26px]">Kami melindungi data privasi dengan baik.</p>
             </div>
         </div>
         <div id="bottom-nav" class="relative flex h-[100px] w-full shrink-0 mt-5">
             <div class="fixed bottom-5 w-full max-w-[640px] z-30 px-4">
                 <div class="flex items-center justify-between rounded-full bg-[#2A2A2A] p-[10px] pl-6">
                     <div class="flex flex-col gap-[2px]">
-                        <p id="grand-total" class="font-bold text-[20px] leading-[30px] text-white">Rp{{ number_format($orderData['grand_total_amount'], 0, ',','.') }}</p>
+                        <p id="grand-total" class="font-bold text-[20px] leading-[30px] text-white">Rp{{ number_format($grandTotalBeforeTax, 0, ',','.') }}</p>
                         <p class="text-sm leading-[21px] text-[#878785]">Grand total</p>
                     </div>
                     <button type="submit" class="rounded-full p-[12px_20px] bg-[#C5F277] font-bold">

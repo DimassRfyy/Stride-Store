@@ -23,6 +23,8 @@ class BrandResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-tag';
 
+    protected static ?string $navigationGroup = 'Shoes Management';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -32,7 +34,9 @@ class BrandResource extends Resource
                     ->maxLength(255),
                 FileUpload::make('logo')
                     ->image()
-                    ->required(),
+                    ->required()
+                    ->disk('public')
+                    ->directory('brandsLogo'),
             ]);
     }
 

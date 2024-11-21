@@ -35,6 +35,8 @@ class ProductTransactionResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-shopping-cart';
 
+    protected static ?string $navigationGroup = 'Transactions';
+
     public static function form(Form $form): Form
     {
         return $form

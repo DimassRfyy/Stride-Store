@@ -29,6 +29,8 @@ class ShoeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-archive-box';
 
+    protected static ?string $navigationGroup = 'Shoes Management';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -44,11 +46,16 @@ class ShoeResource extends Resource
                             ->prefix('IDR'),
                         FileUpload::make('thumbnail')
                             ->image()
+                            ->disk('public')
+                            ->directory('shoesThumbnail')
                             ->required(),
                         Repeater::make('photos')
                             ->relationship('photos')
                             ->schema([
                                 FileUpload::make('photo')
+                                    ->image()
+                                    ->disk('public')
+                                    ->directory('shoesPhotos')
                                     ->required()
                             ]),
                         Repeater::make('sizes')

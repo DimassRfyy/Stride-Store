@@ -58,14 +58,16 @@ class OrderService
 
         $taxRate = 0.11;
         $totalTax = $subTotalAmount * $taxRate;
+        $totalDisc = $orderData['discount_amount'] ?? 0;
 
-        $grandTotalAmount = $subTotalAmount + $totalTax;
+        $grandTotalAmount = $subTotalAmount + $totalTax - $totalDisc;
+        $grandTotalBeforeTax = $subTotalAmount - $totalDisc;
 
         $orderData['sub_total_amount'] = $subTotalAmount;
         $orderData['total_tax'] = $totalTax;
         $orderData['grand_total_amount'] = $grandTotalAmount;
 
-        return compact('orderData', 'shoe');
+        return compact('orderData', 'shoe','grandTotalBeforeTax');
     }
 
     public function applyPromoCode(string $code, int $subTotalAmount)

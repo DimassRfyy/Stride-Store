@@ -3,7 +3,7 @@
         Home
     </x-slot:title>
     <x-slot:topbar>
-        <img src="{{ asset('assets/images/logos/logo.svg') }}" class="flex shrink-0" alt="logo">
+        <img src="{{ asset('assets/images/logos/stride-logo.png') }}" class="flex shrink-0" alt="logo">
         <a href="#">
             <img src="{{ asset('assets/images/icons/notification.svg') }}" class="w-10 h-10" alt="icon">
         </a>

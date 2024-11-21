@@ -117,7 +117,7 @@
                     <img src="{{ asset('assets/images/logos/bca-bank-central-asia 1.svg') }}" class="w-full h-full object-contain" alt="bank logo">
                 </div>
                 <div class="flex flex-col gap-[2px]">
-                    <p class="font-semibold flex items-center">JuaraTiket Indonesia <img src="{{ asset('assets/images/icons/verify.svg') }}" class="ml-1" alt="icon"></p>
+                    <p class="font-semibold flex items-center">Stride Official <img src="{{ asset('assets/images/icons/verify.svg') }}" class="ml-1" alt="icon"></p>
                     <p>8008129839</p>
                 </div>
             </div>
@@ -126,8 +126,8 @@
                     <img src="{{ asset('assets/images/logos/bank-mandiri 1.svg') }}" class="w-full h-full object-contain" alt="bank logo">
                 </div>
                 <div class="flex flex-col gap-[2px]">
-                    <p class="font-semibold flex items-center">JuaraTiket Indonesia <img src="{{ asset('assets/images/icons/verify.svg') }}" class="ml-1" alt="icon"></p>
-                    <p>12379834983281</p>
+                    <p class="font-semibold flex items-center">Stride Official <img src="{{ asset('assets/images/icons/verify.svg') }}" class="ml-1" alt="icon"></p>
+                    <p>1237983491</p>
                 </div>
             </div>
             <hr class="border-[#EAEAED]">
@@ -146,7 +146,7 @@
             <hr class="border-[#EAEAED]">
             <div class="flex items-center gap-[10px]">
                 <img src="{{ asset('assets/images/icons/shield-tick.svg') }}" class="w-8 h-8 flex shrink-0" alt="icon">
-                <p class="leading-[26px]">Kami melindungi data privasi anda dengan baik bantuan Angga X.</p>
+                <p class="leading-[26px]">Kami melindungi data privasi dengan baik.</p>
             </div>
         </section>
         <div id="bottom-nav" class="relative flex h-[100px] w-full shrink-0 mt-5">
