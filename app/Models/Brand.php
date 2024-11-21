@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Storage;
 
 class Brand extends Model
 {
@@ -28,5 +29,24 @@ class Brand extends Model
     {
         $this->attributes['name'] = $value;
         $this->attributes['slug'] = Str::slug($value);
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        // Hapus gambar saat brand dihapus
+        static::deleting(function ($brand) {
+            if ($brand->logo && Storage::disk('public')->exists($brand->logo)) {
+                Storage::disk('public')->delete($brand->logo);
+            }
+        });
+
+        // Hapus gambar lama sebelum diperbarui
+        static::updating(function ($brand) {
+            if ($brand->isDirty('logo') && $brand->getOriginal('logo')) {
+                Storage::disk('public')->delete($brand->getOriginal('logo'));
+            }
+        });
     }
 }

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Storage;
 
 class Shoe extends Model
 {
@@ -49,4 +50,31 @@ class Shoe extends Model
     {
         return $this->hasMany(ShoeSize::class,);
     }
+    protected static function boot()
+{
+    parent::boot();
+
+    // Delete thumbnail and related photos when shoe is deleted
+    static::deleting(function ($shoe) {
+        // Delete the thumbnail if it exists
+        if ($shoe->thumbnail && Storage::disk('public')->exists($shoe->thumbnail)) {
+            Storage::disk('public')->delete($shoe->thumbnail);
+        }
+
+        // Delete related photos in ShoePhoto model
+        foreach ($shoe->photos as $photo) {
+            if ($photo->photo && Storage::disk('public')->exists($photo->photo)) {
+                Storage::disk('public')->delete($photo->photo);
+            }
+            $photo->delete(); // Delete the ShoePhoto record itself
+        }
+    });
+
+    // Delete old thumbnail before updating
+    static::updating(function ($shoe) {
+        if ($shoe->isDirty('thumbnail') && $shoe->getOriginal('thumbnail')) {
+            Storage::disk('public')->delete($shoe->getOriginal('thumbnail'));
+        }
+    });
+}
 }

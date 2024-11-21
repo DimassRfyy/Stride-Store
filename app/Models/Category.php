@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Storage;
 
 class Category extends Model
 {
@@ -28,5 +29,24 @@ class Category extends Model
     {
         $this->attributes['name'] = $value;
         $this->attributes['slug'] = Str::slug($value);
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        // Hapus gambar saat kategori dihapus
+        static::deleting(function ($category) {
+            if ($category->icon && Storage::disk('public')->exists($category->icon)) {
+                Storage::disk('public')->delete($category->icon);
+            }
+        });
+
+        // Hapus gambar lama sebelum diperbarui
+        static::updating(function ($category) {
+            if ($category->isDirty('icon') && $category->getOriginal('icon')) {
+                Storage::disk('public')->delete($category->getOriginal('icon'));
+            }
+        });
     }
 }
