@@ -103,7 +103,7 @@
         <hr class="border-[#EAEAED]">
         <div class="flex items-center gap-[10px]">
             <img src="{{ asset('assets/images/icons/shield-tick.svg') }}" class="w-8 h-8 flex shrink-0" alt="icon">
-            <p class="leading-[26px]">Kami melindungi data privasi anda dengan baik bantuan Angga X.</p>
+            <p class="leading-[26px]">Kami melindungi data privasi anda dengan baik.</p>
         </div>
     </section>
     </div>

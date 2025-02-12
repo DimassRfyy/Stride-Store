@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Repositories\BrandRepository;
 use App\Repositories\OrderRepository;
 use App\Repositories\PromoCodeRepository;
 use App\Repositories\CategoryRepository;
+use App\Repositories\Contracts\BrandRepositoryInterface;
 use App\Repositories\ShoeRepository;
 use App\Repositories\Contracts\OrderRepositoryInterface;
 use App\Repositories\Contracts\ShoeRepositoryInterface;
@@ -20,6 +22,8 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->singleton(CategoryRepositoryInterface::class, CategoryRepository::class);
+
+        $this->app->singleton(BrandRepositoryInterface::class, BrandRepository::class);
 
         $this->app->singleton(ShoeRepositoryInterface::class, ShoeRepository::class);
 

@@ -16,8 +16,8 @@
                 <img src="{{ asset('assets/images/icons/verify.svg') }}" class="w-6 h-6" alt="icon">
             </div>
             <div class="flex flex-col gap-3">
-                <a href="/" class="rounded-full p-[12px_20px] text-center w-full bg-[#C5F277] font-bold">Order More</a>
-                <a href="booking-details.html" class="rounded-full p-[12px_20px] text-center w-full bg-[#090917] font-bold text-white">View Booking</a>
+                <a href="{{ route('front.index') }}" class="rounded-full p-[12px_20px] text-center w-full bg-[#C5F277] font-bold">Order More</a>
+                <a href="{{ route('front.check_booking') }}" class="rounded-full p-[12px_20px] text-center w-full bg-[#090917] font-bold text-white">View Booking</a>
             </div>
         </div>
     </div>

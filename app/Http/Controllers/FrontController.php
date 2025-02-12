@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
 use App\Services\FrontService;
 use App\Models\Shoe;
 use App\Models\Category;
@@ -41,5 +42,10 @@ class FrontController extends Controller
     public function category(Category $category)
     {
         return view('front.category', compact('category'));
+    }
+
+    public function brand(Brand $brand)
+    { 
+        return view('front.brand', compact('brand'));
     }
 }
