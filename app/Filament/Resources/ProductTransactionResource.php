@@ -28,6 +28,7 @@ use Filament\Forms\Components\ToggleButtons;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\ProductTransactionResource\Pages;
 use App\Filament\Resources\ProductTransactionResource\RelationManagers;
+use Filament\Tables\Actions\ActionGroup;
 
 class ProductTransactionResource extends Resource
 {
@@ -36,6 +37,10 @@ class ProductTransactionResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-shopping-cart';
 
     protected static ?string $navigationGroup = 'Transactions';
+    public static function getNavigationBadge(): ?string
+    {
+        return (string) ProductTransaction::where('is_paid', false)->count();
+    }
 
     public static function form(Form $form): Form
     {
@@ -204,23 +209,31 @@ class ProductTransactionResource extends Resource
                     ->relationship('shoe', 'name')
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\ViewAction::make(),
-                Action::make('approve')
-                    ->label('Approve')
-                    ->action(function (ProductTransaction $record) {
-                        $record->is_paid = true;
-                        $record->save();
-
-                        Notification::make()
-                            ->title('Order Approved')
+                ActionGroup::make([
+                    ActionGroup::make([
+                        Tables\Actions\ViewAction::make(),
+                        Tables\Actions\EditAction::make(),
+                    ])
+                        ->dropdown(false),
+                        Tables\Actions\Action::make('approve')
+                        ->label('Approve')
+                        ->action( function (ProductTransaction $record) {
+                            $record->is_paid = true;
+                            $record->save();
+        
+                            Notification::make()
+                            ->title('Transaction Approve')
                             ->success()
-                            ->body('The order has been successfully approved.')
+                            ->body('Transaction has been approved')
                             ->send();
-                    })
-                    ->color('success')
-                    ->requiresConfirmation()
-                    ->visible(fn(ProductTransaction $record) => !$record->is_paid),
+                        })
+                        ->color('success')
+                        ->requiresConfirmation()
+                        ->visible(fn (ProductTransaction $record) => !$record->is_paid),
+                        Tables\Actions\DeleteAction::make()
+                        ->visible(fn (ProductTransaction $record) => $record->is_paid),
+                ])
+                    ->icon('heroicon-m-bars-3')
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

@@ -42,13 +42,18 @@ class PromoCodeResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('code')
-                    ->searchable()
+                    ->searchable(),
+                TextColumn::make('discount_amount')
+                    ->money('idr', true)
+                    ->searchable(),
             ])
             ->filters([
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
